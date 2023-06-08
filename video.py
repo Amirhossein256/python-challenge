@@ -9,13 +9,18 @@ class Video:
 
     def __init__(self, path, sizes=None, crop=None):
         self.sizes = sizes
-        if sizes is None:
-            self.sizes = [(1920, 1080), (1280, 720), (720, 480)]
         self.crop = crop
         self.path = path
         self.output_path = './storage/output'
+
+        if sizes is None:
+            self.sizes = [(1920, 1080), (1280, 720), (720, 480)]
+
         if not os.path.exists(self.output_path):
             os.makedirs(self.output_path)
+
+        if not os.path.exists(path) or not path.endswith('.mp4'):
+            raise Exception('Video path not Found Or Format Not Supported !')
 
         print(f"Video Path is : {path}")
 
